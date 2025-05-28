@@ -15,4 +15,14 @@ class Speaker extends Model
         'email'
     ];
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    // Tworze Accessor, ktory pozwala na tworzenie wirtualnych atrybutow
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

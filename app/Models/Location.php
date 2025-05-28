@@ -14,4 +14,9 @@ class Location extends Model
         'address'
     ];
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
 }

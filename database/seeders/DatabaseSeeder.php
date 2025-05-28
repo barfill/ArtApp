@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SpeakerSeeder::class,
-            EventSeeder::class,
             LocationSeeder::class,
+            EventSeeder::class //Event ostatni, aby mógł mieć referencje do Location i Speaker
         ]);
     }
 }

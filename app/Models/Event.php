@@ -12,7 +12,18 @@ class Event extends Model
     protected $fillable = [
         'name',
         'date',
-        'description'
+        'description',
+        'speaker_id',
+        'location_id'
     ];
 
+    public function speaker()
+    {
+        return $this->belongsTo(Speaker::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
 }

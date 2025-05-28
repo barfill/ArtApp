@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Carbon\Carbon;
 use Exception;
+use App\Models\Speaker;
+use App\Models\Location;
 
 class EventController extends Controller
 {
@@ -36,7 +38,10 @@ class EventController extends Controller
             'ID',
             'Name',
             'Date',
-            'Description'
+            'Description',
+            'Speaker',
+            'Location',
+            'Actions'
         ];
         return view('events.index', compact('events','headers'));
     }
@@ -46,7 +51,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        $speakers = Speaker::all();
+        $locations = Location::all();
+        return view('events.create', compact('speakers', 'locations'));
     }
 
     /**
@@ -58,6 +65,8 @@ class EventController extends Controller
             'name' => 'required|string|max:255',
             'date' => 'required|date',
             'description' => 'nullable|string|max:500',
+            'speaker_id' => 'nullable|exists:speakers,id',
+            'location_id' => 'nullable|exists:locations,id'
         ]);
 
         $data = $request->all();
@@ -88,8 +97,12 @@ class EventController extends Controller
         if (!session('redirect_to')) {
             session(['redirect_to' => url()->previous()]);
         }
-        $event = Event::findOrFail($id);
-        return view('events.edit', compact('event'));
+
+        $event = Event::with('speaker','location')->findOrFail($id);
+        $speakers = Speaker::all();
+        $locations = Location::all();
+
+        return view('events.edit', compact('event', 'speakers', 'locations'));
     }
 
     /**

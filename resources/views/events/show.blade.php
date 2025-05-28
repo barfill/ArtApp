@@ -7,6 +7,9 @@
         <h2>{{ $event->name }}</h2>
         <p><strong>Date:</strong> {{ $event->date }}</p>
         <p><strong>Description:</strong> {{ $event->description }}</p>
+        <p><strong>Speaker:</strong> {{ $event->speaker->full_name }}</p>
+        <p><strong>Location:</strong> {{ $event->location->name }}</p>
+
 
         <div class="btn-group">
             <a href="{{ route('events.edit', $event->id) }}">

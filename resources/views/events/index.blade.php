@@ -27,6 +27,8 @@
                 <td>{{ $event->name }}</td>
                 <td>{{ $event->date }}</td>
                 <td>{{ $event->description }}</td>
+                <td>{{ $event->speaker->full_name }}</td>
+                <td>{{ $event->location->name }}</td>
                 <td>
                     <div class="btn-group">
                         <a href="{{ route('events.show', $event->id)}}">

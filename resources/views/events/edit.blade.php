@@ -30,6 +30,27 @@
             <label for="description">Event Description</label>
             <textarea name="description" id="description" class="form-control">{{ old('description', $event->description) }}</textarea>
         </div>
+        <div class="form-group">
+            <label for="speaker_id">Speaker</label>
+            <select name="speaker_id" id="speaker_id" class="form-control">
+                @foreach ($speakers as $speaker)
+                    <option value="{{ $speaker->id }}" {{ old('speaker_id', $event->speaker_id) == $speaker->id ? 'selected' : '' }}>
+                        {{ $speaker->full_name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="location_id">Location</label>
+            <select name="location_id" id="location_id" class="form-control">
+                @foreach ($locations as $location)
+                    <option value="{{ $location->id }}" {{ old('location_id', $event->location_id) == $location->id ? 'selected' : '' }}>
+                        {{ $location->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="btn-group">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Update Event</button>
