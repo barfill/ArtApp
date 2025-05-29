@@ -33,7 +33,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        // $events = Event::all();
+        $events = Event::orderBy('date', 'asc')->get();
         $headers = [
             'ID',
             'Name',
@@ -114,6 +115,8 @@ class EventController extends Controller
             'name' => 'required|string|max:255',
             'date' => 'required|date',
             'description' => 'required|string|max:500',
+            'speaker_id' => 'nullable|exists:speakers,id',
+            'location_id' => 'nullable|exists:locations,id'
         ]);
 
         $data = $request->all();

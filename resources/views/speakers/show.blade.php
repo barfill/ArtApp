@@ -8,6 +8,7 @@
         <p><strong>First name:</strong> {{ $speaker->first_name }}</p>
         <p><strong>Last name:</strong> {{ $speaker->last_name }}</p>
         <p><strong>Email:</strong> {{ $speaker->email }}</p>
+        <p><strong>Speaker event count:</strong> {{ $speakerEventsCount}} </p>
 
         <div class="btn-group">
             <a href="{{ route('speakers.edit', $speaker->id) }}">

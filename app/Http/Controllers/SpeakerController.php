@@ -18,7 +18,8 @@ class SpeakerController extends Controller
             'ID',
             'First Name',
             'Last Name',
-            'Email'
+            'Email',
+            'Actions',
         ];
         return view('speakers.index', compact('speakers','headers'));
     }
@@ -56,7 +57,8 @@ class SpeakerController extends Controller
     {
         // Log::info('SHOW - Redirect URL: ' . session('redirect_to'));
         $speaker = Speaker::findOrFail($id);
-        return view('speakers.show', compact('speaker'));
+        $speakerEventsCount = $speaker->events()->count();
+        return view('speakers.show', compact('speaker', 'speakerEventsCount'));
     }
 
     /**

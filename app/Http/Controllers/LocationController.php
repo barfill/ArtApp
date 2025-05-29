@@ -16,7 +16,8 @@ class LocationController extends Controller
         $headers = [
             'ID',
             'Name',
-            'Address'
+            'Address',
+            'Actions',
         ];
         return view('locations.index', compact('locations', 'headers'));
     }

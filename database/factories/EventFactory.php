@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Location;
 use App\Models\Speaker;
+use Carbon\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Event>
@@ -18,9 +19,13 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        $dateTime = $this->faker->dateTimeBetween('2000-01-01', '2030-12-31');
+        $formattedDateTime = Carbon::instance($dateTime)->format('Y-m-d H:i:00');
+
         return [
             'name' => $this->faker->sentence(3),
-            'date' => $this->faker->dateTimeBetween('2000-01-01', '2030-12-31'),
+            // 'date' => $this->faker->dateTimeBetween('2000-01-01', '2030-12-31'),
+            'date' => $formattedDateTime, // Użycie Carbon do formatowania daty, żeby nie było sekund w timepickerze
             'description' => $this->faker->paragraph(3),
             //***To rozwiązanie tworzy nowe rekordy w tabelach 'speakers' i 'locations' za każdym razem, gdy tworzysz nowy event.
             // 'speaker_id' => Speaker::factory(),
